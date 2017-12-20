@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.ecoa.technology/insertion-policy-1.0" xmlns:tns="http://www.ecoa.technology/insertion-policy-1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.ecoa.technology/insertion-policy-1.0">
+
+	<!-- Insertion policies for an ECOA binary component -->
+
+	<xsd:include schemaLocation="../ecoa-common-1.0.xsd" />
+
+	<xsd:element name="insertionPolicies" type="InsertionPolicyList">
+		<xsd:annotation>
+			<xsd:documentation>Defines the list of insertion policies for
+				which the
+				component was validated
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="InsertionPolicyList">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="insertionPolicy" type="InsertionPolicy">
+				<xsd:annotation>
+					<xsd:documentation>Insertion policy entry
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="componentImplementation" type="NameId" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Name of the component implementation
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="InsertionPolicy">
+		<xsd:annotation>
+			<xsd:documentation>A consistent set of policies for which the
+				component was
+				validated, which means that its functional
+				behaviour is correct and it
+				fulfills its expected QoS
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="target" type="Target" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Targeted system on which the insertion policy applies to
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="processorTarget" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Processor Target
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="registerSize" type="RegisterSize" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Size of the processor register
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="memoryUsage" type="MemoryUsage" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Information on how the component uses memory
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="realtimeCharacteristics" type="RealtimeCharacteristics" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Information on scheduling, module activation
+						profiles, etc.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="timeAccuracy" type="TimeAccuracy" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Time Accuracy
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="transportProtocol" type="TransportProtocol" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Transport Protocol Requirements
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="deploymentConstraints" type="DeploymentConstraints" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Deployment Constraints
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="ECOAProfile" type="ECOAProfile" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						ECOA Profile used for developing the component
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="compiler" type="Compiler" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Compiler used to generate the binaries
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="genericCompilationOptions" type="GenericCompilationOptions" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Compilation/Linkage options global to the component
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="modulesDependencies" type="ModulesDependencies" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Compilation/Linkage options specific to a module
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="extraConcerns" type="ExtraConcerns" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Any other concerns stored in a separate file
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="defaultPINFO" type="DefaultPINFO" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						PINFO which were used to validate the component
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="defaultProperties" type="DefaultProperties" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Default property values against which the component
+						has been validated
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<!-- Register Size -->
+	<xsd:complexType name="RegisterSize">
+		<xsd:attribute name="size" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					Register size in bits
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:positiveInteger">
+					<xsd:enumeration value="16" />
+					<xsd:enumeration value="32" />
+					<xsd:enumeration value="64" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Memory Usage -->
+	<xsd:complexType name="MemoryUsage">
+		<xsd:sequence>
+			<xsd:element name="moduleMemoryUsage" type="ModuleMemoryUsage" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Module memory usage entry
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ModuleMemoryUsage">
+		<xsd:annotation>
+			<xsd:documentation>Information on module memory usage
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="userContextSize">
+				<xsd:annotation>
+					<xsd:documentation>User context size in bytes
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="warmStartContextSize">
+				<xsd:annotation>
+					<xsd:documentation>Warm start context size in bytes
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="dynamicMemory">
+				<xsd:annotation>
+					<xsd:documentation>Information about dynamic memory allocation
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:attribute name="allocation" use="required">
+						<xsd:annotation>
+							<xsd:documentation>Does the module allocate dynamically ?
+							</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="yes" />
+								<xsd:enumeration value="no" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+					<xsd:attribute name="maxSize" type="xsd:nonNegativeInteger" use="required">
+						<xsd:annotation>
+							<xsd:documentation>Max size of the dynamic memory in bytes
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="stackSize">
+				<xsd:annotation>
+					<xsd:documentation>Max stack size in bytes
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="heapSize">
+				<xsd:annotation>
+					<xsd:documentation>Max heap size in bytes
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="instanceName" type="NameId" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					Reference to a module instance name
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+	<!-- Realtime Characteristics -->
+	<xsd:complexType name="RealtimeCharacteristics">
+		<xsd:sequence>
+			<xsd:element name="schedulingPolicy">
+				<xsd:annotation>
+					<xsd:documentation>A scheduling policy for which the component
+						was
+						validated
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:attribute name="policy" type="SchedulingPolicy" use="required">
+						<xsd:annotation>
+							<xsd:documentation>OS-level scheduling policy used to schedule
+								modules
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="moduleActivationProfiles" type="ModuleActivationProfiles">
+				<xsd:annotation>
+					<xsd:documentation>Set of module activation profiles
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:simpleType name="SchedulingPolicy">
+		<xsd:annotation>
+			<xsd:documentation>Scheduling policies</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="RT-FIFO" />
+			<xsd:enumeration value="ROUND-ROBIN" />
+			<xsd:enumeration value="ARINC-653" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="ModuleActivationProfiles">
+		<xsd:sequence>
+			<xsd:element name="activationProfile" type="ModuleActivationProfile" minOccurs="1" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Module activation profile entry
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ModuleActivationProfile">
+		<xsd:choice minOccurs="1" maxOccurs="1">
+			<xsd:element name="periodic" type="PeriodicActivationProfile">
+				<xsd:annotation>
+					<xsd:documentation>To describe a periodic activation model
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="reactive" type="AperiodicActivationProfile">
+				<xsd:annotation>
+					<xsd:documentation>To describe an event-driven activation model
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+		<xsd:attribute name="instanceName" type="NameId" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					Reference to a module instance name
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="activationType">
+			<xsd:annotation>
+				<xsd:documentation>Module activation type (event-driven, time-driven,
+					other)
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="reactive" />
+					<xsd:enumeration value="periodic" />
+					<xsd:enumeration value="other" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute default="1" name="queueDepth" type="xsd:positiveInteger" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					Depth of the incoming operations queue.
+					This value has
+					no impact of the code generation.
+					It is only to store intermediate
+					analysis result done by the
+					component supplier.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute default="1" name="maxNbOfProcessedOpsPerActivation" type="xsd:positiveInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					Max number of processed operations per
+					activation
+					including the
+					activating one.
+					This value has no
+					impact of the code
+					generation.
+					It is only to store intermediate
+					analysis result done by the
+					component supplier.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="behaviour" type="xsd:anyURI" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					Link towards the module temporal behaviour
+					xxx.behaviour.xml
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="PeriodicActivationProfile">
+		<xsd:attribute name="deadline" type="Deadline">
+			<xsd:annotation>
+				<xsd:documentation>
+					Deadline of the module in steps. It shall
+					cover the
+					processing of all non activating operations and the
+					activating one
+					which
+					initiates the processing.
+					Value to be taken into account by the
+					system
+					integrator.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="wcet" type="WCET">
+			<xsd:annotation>
+				<xsd:documentation>
+					WCET of the module in steps. It shall cover
+					the
+					processing of all non activating operations and the
+					activating one
+					which
+					initiates the processing.
+					Value to be taken into account by the
+					system
+					integrator.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="period" type="Period">
+			<xsd:annotation>
+				<xsd:documentation>
+					Period of the module in steps. Expected time
+					between
+					the
+					arrival of two activating operations.
+					Value to be taken into account
+					by
+					the
+					system integrator.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="relativePriority" type="RelativePriority">
+			<xsd:annotation>
+				<xsd:documentation>
+					Relative priority of this module instance to
+					others
+					module instances
+					To help to distinguish several module
+					instances sharing
+					the same profile
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="AperiodicActivationProfile">
+		<xsd:sequence>
+			<xsd:element name="rate" type="HighestActivationRate" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Highest activation rate
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="deadline" type="Deadline">
+			<xsd:annotation>
+				<xsd:documentation>
+					Deadline of the module in steps. It shall
+					cover the
+					processing of all non activating operations and the
+					activating one
+					which
+					initiates the processing.
+					Value to be taken into account by the
+					system
+					integrator.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="wcet" type="WCET">
+			<xsd:annotation>
+				<xsd:documentation>
+					WCET of the module in steps. It shall cover
+					the
+					processing of all non activating operations and the
+					activating one
+					which
+					initiates the processing.
+					Value to be taken into account by the
+					system
+					integrator.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="relativePriority" type="RelativePriority">
+			<xsd:annotation>
+				<xsd:documentation>
+					Relative priority of this module instance to
+					others
+					module instances
+					To help to distinguish several module
+					instances sharing
+					the same profile
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:simpleType name="Deadline">
+		<xsd:restriction base="Steps" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="WCET">
+		<xsd:restriction base="Steps" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="Period">
+		<xsd:restriction base="Steps" />
+	</xsd:simpleType>
+
+	<xsd:simpleType name="RelativePriority">
+		<xsd:restriction base="xsd:nonNegativeInteger" />
+	</xsd:simpleType>
+
+	<xsd:complexType name="HighestActivationRate">
+		<xsd:attribute name="numberOfActivations" type="xsd:decimal" use="optional" default="1">
+			<xsd:annotation>
+				<xsd:documentation>Min or max number of activations occurring during a
+					specified duration
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="timeFrame" type="TimeDuration" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Equal to min or max inter-arrival time when
+					NumberOfActivations value is 1.
+					In other cases, specifies a sizing
+					duration for activations
+					bursts.
+					Unit is second.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Time accuracy -->
+	<xsd:complexType name="TimeAccuracy">
+		<xsd:attribute name="value" type="TimeDuration">
+			<xsd:annotation>
+				<xsd:documentation>
+					Time accuracy in seconds
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Transport Protocol Requirements -->
+	<xsd:complexType name="TransportProtocol">
+		<xsd:attribute name="quality" default="lossless">
+			<xsd:annotation>
+				<xsd:documentation>
+					Expected quality of the underlying transport protocol
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="lossless" />
+					<xsd:enumeration value="none" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="integrity" default="high">
+			<xsd:annotation>
+				<xsd:documentation>
+					Expected integrity of the underlying transport
+					protocol
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="high" />
+					<xsd:enumeration value="none" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="maxLatency" type="TimeDuration">
+			<xsd:annotation>
+				<xsd:documentation>
+					Maximum latency for exchange of events between two
+					modules.
+					If the actual maximum latency is higher than the defined
+					value, the component may not run correctly.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="minBandwidth" type="xsd:nonNegativeInteger">
+			<xsd:annotation>
+				<xsd:documentation>
+					Minimum bandwidth in kBytes/s for exchange of data
+					between two modules.
+					If the actual maximum bandwidth is lesser than the
+					defined
+					value, the component may not run correctly.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Deployment Constraints -->
+	<xsd:complexType name="DeploymentConstraints">
+		<xsd:attribute name="uniqueProtectionDomain" type="xsd:boolean">
+			<xsd:annotation>
+				<xsd:documentation>Do the modules need to be co-located in the same
+					protection domain ?
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="deploymentExample" type="xsd:anyURI" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>
+					Link towards an external file showing the deployment
+					used to validate the
+					component
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- ECOA Profile -->
+	<xsd:complexType name="ECOAProfile">
+		<xsd:attribute name="profile" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					ECOA Profile
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="core" />
+					<xsd:enumeration value="extended" />
+					<xsd:enumeration value="other" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Module Dependencies -->
+	<xsd:complexType name="ModulesDependencies">
+		<xsd:sequence>
+			<xsd:element name="moduleDependencies" type="ModuleDependencies" minOccurs="1" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Module dependencies entry
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ModuleDependencies">
+		<xsd:sequence>
+			<xsd:element name="languageRuntime" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Programming language used for developing the module
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="languageLibraries" type="LanguageLibraries" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Libraries
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="directOSAccess" type="OSAPIType" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Underlying OS Standard
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="moduleCompilationOptions" type="ModuleCompilationOptions" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>
+						Module specific compilation options
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="instanceName" type="NameId" use="required">
+			<xsd:annotation>
+				<xsd:documentation>
+					Reference to the module instance
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+	<!-- Language Libraries -->
+	<xsd:complexType name="LanguageLibraries">
+		<xsd:sequence>
+			<xsd:element name="library" type="LanguageLibrary" minOccurs="1" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Library entry
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="LanguageLibrary">
+		<xsd:attribute name="name" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Name of the library
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="type" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Type of library
+				</xsd:documentation>
+			</xsd:annotation>
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="math" />
+					<xsd:enumeration value="graphics" />
+					<xsd:enumeration value="geodesic" />
+					<xsd:enumeration value="other" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="version" type="xsd:string" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Semantic version number of the library
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+	<!-- OS API -->
+	<xsd:complexType name="OSAPIType">
+		<xsd:attribute name="type" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="POSIX" />
+					<xsd:enumeration value="ASAAC" />
+					<xsd:enumeration value="A653" />
+					<xsd:enumeration value="FACE" />
+					<xsd:enumeration value="other" />
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+
+
+	<!-- Compiler -->
+	<xsd:complexType name="Compiler">
+		<xsd:attribute name="name" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Compiler name
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Generic Compilation Options -->
+	<xsd:simpleType name="GenericCompilationOptions">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+
+	<!-- Specific Compilation Options -->
+	<xsd:complexType name="ModuleCompilationOptions">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="instanceName" type="NameId" use="required">
+					<xsd:annotation>
+						<xsd:documentation>
+							Reference to the module instance
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Extra Concerns -->
+	<xsd:complexType name="ExtraConcerns">
+		<xsd:attribute name="file">
+			<xsd:simpleType>
+				<xsd:annotation>
+					<xsd:documentation>
+						URI to an external file
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:restriction base="xsd:anyURI" />
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<!-- Default PINFO -->
+	<xsd:complexType name="DefaultPINFO">
+		<xsd:sequence>
+			<xsd:element name="modulePINFO" minOccurs="1" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Set of PINFOs used by the module
+					</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element minOccurs="0" maxOccurs="unbounded" name="publicPINFO" type="PINFOValue">
+							<xsd:annotation>
+								<xsd:documentation>Public PINFO used by the module
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element minOccurs="0" maxOccurs="unbounded" name="privatePINFO" type="PINFOValue">
+							<xsd:annotation>
+								<xsd:documentation>Private PINFO used by the module
+								</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:attribute name="instanceName" type="NameId" use="required">
+						<xsd:annotation>
+							<xsd:documentation>
+								Reference to the module instance
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:complexType>
+				<xsd:unique name="pinfovaluename">
+					<xsd:selector xpath="tns:publicPINFO|tns:privatePINFO" />
+					<xsd:field xpath="@name" />
+				</xsd:unique>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="PINFOValue">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="name" type="xsd:string" use="required">
+					<xsd:annotation>
+						<xsd:documentation>
+							Name of the PINFO
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Default Properties -->
+	<xsd:complexType name="DefaultProperties">
+		<xsd:sequence>
+			<xsd:element name="property" type="defaultPropertyValue" minOccurs="1" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>
+						Default Property Value
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="defaultPropertyValue">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="name" type="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>
+							Name of the property
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+
+	<!-- Targeted system on which the insertion policy applies to -->
+	<xsd:simpleType name="Target">
+		<xsd:restriction base="xsd:string" />
+	</xsd:simpleType>
+
+</xsd:schema>

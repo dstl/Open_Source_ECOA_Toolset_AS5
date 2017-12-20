@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.ecoa.technology/bin-desc-1.0" xmlns:tns="http://www.ecoa.technology/bin-desc-1.0"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.ecoa.technology/bin-desc-1.0">
+
+  <xsd:include schemaLocation="ecoa-common-1.0.xsd"/>
+  <xsd:element name="binDesc" type="BinDesc"/>
+
+  <xsd:complexType name="BinDesc">
+    <xsd:annotation>
+      <xsd:documentation>Links between module implementations and binary objects
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="processorTarget" type="ProcessorTarget"/>
+      <xsd:element maxOccurs="unbounded" name="binaryModule" type="BinaryModule"/>
+    </xsd:sequence>
+    <!-- the following attribute points to a logical name -->
+    <xsd:attribute name="componentImplementation" type="NameId" use="required"/>
+    <xsd:attribute name="insertionPolicy" type="xsd:anyURI" use="optional">
+      <xsd:annotation>
+        <xsd:documentation>Link to an external table containing insertion policy data of the binary ECOA component
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="ProcessorTarget">
+    <xsd:annotation>
+      <xsd:documentation>"Identification of the processor for which modules have
+        been compiled"
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="type" type="xsd:string" use="required"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="BinaryModule">
+    <xsd:annotation>
+      <xsd:documentation>Technical description of the binary module</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="binaryDependency" type="BinaryDependency"/>
+    </xsd:sequence>
+    <xsd:attribute name="reference" type="xsd:NCName" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Name of the module implementation</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="object" type="xsd:anyURI" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Filename of the binary implementing the referenced
+          module. The filename may contain path information relative to
+          the bin-desc location e.g. "binaries/module.o" relates a file 'module.o'
+          located in a subdirectory 'binaries' of the directory containing the
+          bin-desc file. Separators are '/'
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="userContextSize" type="HexOrDecValue" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Size in bytes of the module user context
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="warmStartContextSize" type="HexOrDecValue" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Size in bytes of the module warm start context
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="stackSize" type="HexOrDecValue" use="required">
+      <xsd:annotation>
+        <xsd:documentation>maximum size in bytes of the stack used by any module
+          entry point (including all sub-function calls)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="heapSize" type="HexOrDecValue" use="required">
+      <xsd:annotation>
+        <xsd:documentation>maximum size in bytes of the heap (memory dynamically
+          allocated by the module binary itself: malloc or
+          object instances)
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="checksum" type="HexOrDecValue" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Checksum of the binary</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+  <xsd:complexType name="BinaryDependency">
+    <xsd:annotation>
+      <xsd:documentation>binary dependency that needs to be linked
+        with the initial object
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:attribute name="object" type="xsd:anyURI" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Filename of the binary implementing the referenced
+          dependency
+        </xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+    <xsd:attribute name="checksum" type="HexOrDecValue" use="required">
+      <xsd:annotation>
+        <xsd:documentation>Checksum of the binary dependency</xsd:documentation>
+      </xsd:annotation>
+    </xsd:attribute>
+  </xsd:complexType>
+
+</xsd:schema>

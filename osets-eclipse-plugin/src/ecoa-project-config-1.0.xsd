@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema xmlns="http://www.ecoa.technology/project-config-1.0"
+	xmlns:tns="http://www.ecoa.technology/project-config-1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.ecoa.technology/project-config-1.0"
+	elementFormDefault="qualified" xmlns:pref="http://www.ecoa.technology/project-1.0"
+	xmlns:pns="http://www.ecoa.technology/project-1.0">
+
+	<xs:import schemaLocation="../schemas/ecoa-project-1.0.xsd"
+		namespace="http://www.ecoa.technology/project-1.0"></xs:import>
+
+	<xs:complexType name="EcoaProjectConfig">
+
+		<xs:sequence>
+			<xs:element name="toolConfig" type="ConfigData" maxOccurs="1"
+				minOccurs="0">
+			</xs:element>
+
+			<xs:element ref="pns:ECOAProject"
+				maxOccurs="1" minOccurs="0"></xs:element>
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required" />
+
+	</xs:complexType>
+
+	<xs:element name="ecoaProjectConfig" type="EcoaProjectConfig"></xs:element>
+
+	<xs:complexType name="ConfigData">
+
+		<xs:sequence>
+			<xs:element name="APIConfig" type="APIConfigData"></xs:element>
+			<xs:element name="PlatformConfig" type="PlatformConfigData"></xs:element>
+    	    <xs:element maxOccurs="1" minOccurs="0" name="precompiledComponents" type="PrecompiledComponents"/>
+		</xs:sequence>
+
+	</xs:complexType>
+
+	<xs:complexType name="APIConfigData">
+		<xs:attribute name="generateBodies" type="xs:boolean"
+			default="true">
+		</xs:attribute>
+		<xs:attribute name="overwrite" type="xs:boolean" default="false">
+		</xs:attribute>
+		<xs:attribute name="generateTemplateCModules" type="xs:boolean"
+			default="false"></xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="PlatformConfigData">
+		<xs:attribute name="instrumentAllModules" type="xs:boolean" default="false"></xs:attribute>
+	</xs:complexType>
+	
+  <xs:complexType name="PrecompiledComponents">
+    <xs:annotation>
+      <xs:documentation>List of precompiled components</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+       <xs:element maxOccurs="unbounded" name="ComponentImpl" type="ComponentImpl"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="ComponentImpl">
+    <xs:annotation>
+      <xs:documentation>Component implementation containing list of pre-built binary module implementations</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+       <xs:element maxOccurs="unbounded" name="binaryModuleImpl" type="BinaryModuleImpl"/>
+    </xs:sequence> 
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="BinaryModuleImpl">    
+    <xs:annotation>
+      <xs:documentation>The location is relative to the Steps directory.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="binaryObjectLocation" type="xs:anyURI" use="required"/>
+  </xs:complexType>
+  
+</xs:schema>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ecoa-sca="http://www.ecoa.technology/sca" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912" elementFormDefault="qualified" targetNamespace="http://www.ecoa.technology/sca">
+	<import namespace="http://docs.oasis-open.org/ns/opencsa/sca/200912" schemaLocation="sca-core-1.1-cd06-subset.xsd" />
+	<include schemaLocation="extensions/ecoa-sca-instance-1.0.xsd" />
+	<include schemaLocation="extensions/ecoa-sca-interface-1.0.xsd" />
+	<include schemaLocation="ecoa-sca-attributes-1.0.xsd" />
+
+</schema>

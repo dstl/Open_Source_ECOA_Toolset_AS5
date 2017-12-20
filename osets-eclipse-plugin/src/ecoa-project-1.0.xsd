@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.ecoa.technology/project-1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified" targetNamespace="http://www.ecoa.technology/project-1.0">
+  <xsd:include schemaLocation="ecoa-common-1.0.xsd"/>
+
+  <xsd:element name="ECOAProject" type="EcoaProject"/>
+
+
+  <xsd:complexType name="EcoaProject">
+    <xsd:annotation>
+      <xsd:documentation>
+        Describes a whole ECOA project
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:choice maxOccurs="unbounded" minOccurs="0">
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="serviceDefinitions" type="Files"/>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="componentDefinitions" type="Files"/>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="types" type="Files"/>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="initialAssembly" type="xsd:anyURI"/>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="componentImplementations" type="Files"/>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="logicalSystem" type="xsd:anyURI"/>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="deploymentSchema" type="xsd:anyURI"/>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="outputDirectory" type="xsd:anyURI"/>
+        <xsd:element maxOccurs="unbounded" minOccurs="0" name="implementationAssembly" type="xsd:anyURI"/>
+      </xsd:choice>
+    </xsd:sequence>
+    <xsd:attribute name="name" type="xsd:string" use="required"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="Files">
+    <xsd:annotation>
+      <xsd:documentation>List of files</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="file" type="xsd:anyURI"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+
+</xsd:schema>

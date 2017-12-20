@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.ecoa.technology/module-behaviour-1.0" xmlns:tns="http://www.ecoa.technology/module-behaviour-1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.ecoa.technology/module-behaviour-1.0">
+
+	<!-- Behaviour of module operations -->
+	<!-- This XSD contains data describing a module's behaviour, which are not being used by ECOA platforms, but which may contribute to early validation activities, especially regarding schedulability analysis of a non-periodic system. -->
+
+	<xsd:include schemaLocation="../ecoa-common-1.0.xsd" />
+
+	<xsd:element name="moduleBehaviour" type="ModuleBehaviour" />
+
+	<xsd:complexType name="ModuleBehaviour">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="1" name="entryPoint" type="EntryPoint">
+				<xsd:annotation>
+					<xsd:documentation>Incoming operation (event or request received)
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="dataNotification" type="DataNotification">
+				<xsd:annotation>
+					<xsd:documentation>Incoming versioned data update
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="responseNotification" type="ResponseNotification">
+				<xsd:annotation>
+					<xsd:documentation>Incoming response</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="moduleLifeCycleNotification" type="ModuleLifeCycleNotification">
+				<xsd:annotation>
+					<xsd:documentation>Module lifecycle notification</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="serviceManagementNotification" type="ServiceManagementNotification">
+				<xsd:annotation>
+					<xsd:documentation>Service availability or service provider
+						change notification
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="ActionSet">
+		<xsd:annotation>
+			<xsd:documentation>A set of actions to be sequentially executed by the
+				module.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice maxOccurs="unbounded">
+			<xsd:element name="loop" type="Loop">
+				<xsd:annotation>
+					<xsd:documentation>Loop of actions</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="computing" type="Computing">
+				<xsd:annotation>
+					<xsd:documentation>Processing internal to the module
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="operationCall" type="OperationCall">
+				<xsd:annotation>
+					<xsd:documentation>Call to an operation outside of the module
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+
+	<xsd:complexType name="EntryPoint">
+		<xsd:complexContent>
+			<xsd:extension base="ActionSet">
+				<xsd:attribute name="name" type="NameId" use="required">
+					<xsd:annotation>
+						<xsd:documentation>Name of the incoming module operation
+							See compl.impl.xml.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="activatingCondition" type="NameId" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>Reference to the activating operation if the
+							operation here described is not activating
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+				<xsd:attribute name="deadline" type="Steps" use="optional">
+					<xsd:annotation>
+						<xsd:documentation>Deadline of the operation.
+							This value has no impact of the code generation.
+							It is only to store intermediate analysis result done by the
+							component supplier.
+						</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="DataNotification">
+		<xsd:complexContent>
+			<xsd:extension base="EntryPoint" />
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ResponseNotification">
+		<xsd:complexContent>
+			<xsd:extension base="EntryPoint" />
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ModuleLifeCycleNotification">
+		<xsd:complexContent>
+			<xsd:extension base="EntryPoint" />
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="ServiceManagementNotification">
+		<xsd:complexContent>
+			<xsd:extension base="EntryPoint" />
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Loop">
+		<xsd:complexContent>
+			<xsd:extension base="ActionSet">
+				<xsd:attribute name="Iterations" type="xsd:positiveInteger" use="required">
+					<xsd:annotation>
+						<xsd:documentation>Number of iterations</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="Computing">
+		<xsd:attribute name="minComputingSteps" type="Steps" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Minimum number of computing steps</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="maxComputingSteps" type="Steps" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Maximum number of computing steps</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="OperationCall">
+		<xsd:attribute name="moduleOperationRef" type="NameId" use="required">
+			<xsd:annotation>
+				<xsd:documentation>Reference to a required operation</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute default="0" name="minComputingSteps" type="Steps" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Minimum number of computing steps due to the
+					operation call itself (not including computing steps to
+					execute the operation in the called module)
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute default="0" name="maxComputingSteps" type="Steps" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Maximum number of computing steps due to the
+					operation call itself (not including computing steps to
+					execute the operation in the called module)
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.ecoa.technology/uid-1.0" xmlns:tns="http://www.ecoa.technology/uid-1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified" targetNamespace="http://www.ecoa.technology/uid-1.0">
+
+  <xsd:element name="ID_map" type="ID_map">
+    <!-- each "key" attribute shall be unique -->
+    <xsd:key name="key">
+      <xsd:selector xpath="tns:ID"/>
+      <xsd:field xpath="@key"/>
+    </xsd:key>
+    <!-- each "value" attribute shall be unique -->
+    <xsd:key name="value">
+      <xsd:selector xpath="tns:ID"/>
+      <xsd:field xpath="@value"/>
+    </xsd:key>
+  </xsd:element>
+
+  <xsd:complexType name="ID_map">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ID" type="ID"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="ID">
+    <xsd:attribute name="key" type="xsd:string" use="required"/>
+    <xsd:attribute name="value" type="xsd:int" use="required"/>
+  </xsd:complexType>
+
+</xsd:schema>

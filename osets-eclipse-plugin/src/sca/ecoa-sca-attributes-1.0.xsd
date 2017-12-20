@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  xmlns:ecoa-sca="http://www.ecoa.technology/sca" targetNamespace="http://www.ecoa.technology/sca">  
+  
+  <attribute name="rank" type="xs:positiveInteger">
+    <annotation>
+      <documentation>The rank attribute is a custom ECOA attribute used
+        on wires to indicate priority between wires
+      </documentation>
+    </annotation>
+  </attribute>
+
+  <attribute name="promoteRankList" type="ecoa-sca:listOfRanks">
+    <annotation>
+      <documentation>The promoteRankList attribute is a custom ECOA attribute
+        used on composite references, in order to provide the list of ranks
+        corresponding to the list of promoted component references. There must
+        be one item in the promoteRankList attribute for each item in the 
+        promote attribute of a composite reference.
+      </documentation>
+    </annotation>
+  </attribute>
+
+  <attribute default="false" name="allEventsMulticasted" type="xs:boolean">
+    <annotation>
+      <documentation>Boolean indicating if all events provided by the sender are
+        multicast or not
+      </documentation>
+    </annotation>
+  </attribute>
+
+  <attribute name="type" type="xs:string"/>
+
+  <attribute name="deployment" type="xs:string"/>
+
+  <complexType name="wireInformation">
+    <annotation>
+      <documentation>Any additional wire information parameters required
+        by the system integrator (non-defined by ECOA) e.g. 
+        CIA (Confidentiality, Integrity and Availability)
+      </documentation>
+    </annotation>
+    <attribute name="link" type="anyURI">
+      <annotation>
+        <documentation>Link to any external file containing parameters
+        </documentation>
+      </annotation>
+    </attribute>
+  </complexType>
+
+  <simpleType name="listOfRanks">
+    <list itemType="positiveInteger"/>
+  </simpleType>
+</schema>

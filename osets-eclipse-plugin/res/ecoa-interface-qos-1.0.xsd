@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xsd:schema xmlns="http://www.ecoa.technology/interface-qos-1.0" xmlns:tns="http://www.ecoa.technology/interface-qos-1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.ecoa.technology/interface-qos-1.0">
+	<xsd:include schemaLocation="ecoa-common-1.0.xsd" />
+	<xsd:element name="serviceInstanceQoS" type="ServiceInstanceQoS" />
+	<xsd:complexType name="ServiceInstanceQoS">
+		<xsd:annotation>
+			<xsd:documentation>The definition of an ECOA service, including a set of
+				operations.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence maxOccurs="1" minOccurs="1">
+			<xsd:element name="operations" type="Operations" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Operations">
+		<xsd:annotation>
+			<xsd:documentation>A set of named operations.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice maxOccurs="unbounded" minOccurs="1">
+			<xsd:element name="data" type="Data" />
+			<xsd:element name="event" type="Event" />
+			<xsd:element name="requestresponse" type="RequestResponse" />
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="Data">
+		<xsd:annotation>
+			<xsd:documentation>Use of the "versionned data" exchange mechanism.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="highestRate" type="OperationRate">
+				<xsd:annotation>
+					<xsd:documentation>Max number of occurrences within a reference time
+						frame
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="lowestRate" type="OperationRate">
+				<xsd:annotation>
+					<xsd:documentation>Min number of occurrences within a reference time
+						frame
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="NameId" use="required" />
+		<xsd:attribute name="maxAgeing" type="TimeDuration" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Operation Provided : max duration between Data
+					production (from the source) and the end of writing
+					process.
+					Operation Required : max duration between Data production
+					(from the source) and the end of reading process.
+					Unit is second.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="notificationMaxHandlingTime" type="TimeDuration" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Notifying data case: maxHandlingTime for notification
+					event. Unit is second.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="Event">
+		<xsd:annotation>
+			<xsd:documentation>Use of the "event" exchange mechanism.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="highestRate" type="OperationRate">
+				<xsd:annotation>
+					<xsd:documentation>Max number of occurrences within a reference time
+						frame
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="lowestRate" type="OperationRate">
+				<xsd:annotation>
+					<xsd:documentation>Min number of occurrences within a reference time
+						frame
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="NameId" use="required" />
+		<xsd:attribute name="maxHandlingTime" type="TimeDuration" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Event Sent : specifies an intent on receivers for
+					maximal duration between Event Reception and end of
+					related processing
+					Event Received : maximal duration between Event Received and end of
+					related processing.
+					Unit is second.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="RequestResponse">
+		<xsd:annotation>
+			<xsd:documentation>Use of the "request-reply" exchange mechanism.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="0" name="highestRate" type="OperationRate">
+				<xsd:annotation>
+					<xsd:documentation>Max number of occurrences within a reference time
+						frame
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element maxOccurs="1" minOccurs="0" name="lowestRate" type="OperationRate">
+				<xsd:annotation>
+					<xsd:documentation>Min number of occurrences within a reference time
+						frame
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="NameId" use="required" />
+		<xsd:attribute name="maxResponseTime" type="TimeDuration" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Operation Provided : maximal duration between Request
+					Reception and Callback Sent
+					Operation Required : maximal duration between Request Sent and
+					Callback reception.
+					Unit is second.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="callbackMaxHandlingTime" type="TimeDuration" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>maxHandlingTime to execute the callback entry-point.
+					Unit is second.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="OperationRate">
+		<xsd:attribute name="numberOfOccurrences" type="xsd:decimal" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Min or max number of operations occurring during a
+					specified duration
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="timeFrame" type="TimeDuration" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Equal to min or max inter-arrival time when
+					NumberOfOccurrences value is 1.
+					In other cases, specifies a sizing duration for operations
+					bursts.
+					Unit is second.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            name="tech.ecoa.osets.eclipse.rcp"
+            application="org.eclipse.e4.ui.workbench.swt.E4Application">
+         <property
+               name="applicationCSS"
+               value="platform:/plugin/osets-eclipse-plugin/css/default.css">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="tech.ecoa.osets.eclipse.plugin.editors.TypesEditor"
+            contributorClass="tech.ecoa.osets.eclipse.plugin.common.GraphicalEditorContributor"
+            extensions="types"
+            icon="icons/types.png"
+            id="tech.ecoa.osets.eclipse.plugin.editors.TypesEditor"
+            name="Types Editor">
+      </editor>
+      <editor
+            class="tech.ecoa.osets.eclipse.plugin.editors.ServicesEditor"
+            contributorClass="tech.ecoa.osets.eclipse.plugin.common.GraphicalEditorContributor"
+            extensions="srvc"
+            icon="icons/services.png"
+            id="tech.ecoa.osets.eclipse.plugin.editors.ServicesEditor.ServicesEditor"
+            name="Services Editor">
+      </editor>
+      <editor
+            class="tech.ecoa.osets.eclipse.plugin.editors.CompDefEditor"
+            contributorClass="tech.ecoa.osets.eclipse.plugin.common.GraphicalEditorContributor"
+            extensions="cdef"
+            icon="icons/comp_def.png"
+            id="tech.ecoa.osets.eclipse.plugin.editors.CompDefEditor"
+            name="Component Definition Editor">
+      </editor>
+      <editor
+            class="tech.ecoa.osets.eclipse.plugin.editors.InitAssemblyEditor"
+            contributorClass="tech.ecoa.osets.eclipse.plugin.common.GraphicalEditorContributor"
+            extensions="assmbl"
+            icon="icons/init_assmbl.png"
+            id="tech.ecoa.osets.eclipse.plugin.editors.InitAssemblyEditor"
+            name="Initial Assembly Editor">
+      </editor>
+      <editor
+            class="tech.ecoa.osets.eclipse.plugin.editors.IntFinalAssemblyEditor"
+            contributorClass="tech.ecoa.osets.eclipse.plugin.common.GraphicalEditorContributor"
+            extensions="fassmbl"
+            icon="icons/final_assmbl.png"
+            id="tech.ecoa.osets.eclipse.plugin.editors.IntFinalAssemblyEditor"
+            name="Integration Final Assembly Editor">
+      </editor>
+      <editor
+            class="tech.ecoa.osets.eclipse.plugin.editors.IntLogicalSysEditor"
+            contributorClass="tech.ecoa.osets.eclipse.plugin.common.GraphicalEditorContributor"
+            extensions="lsys"
+            icon="icons/log_sys.png"
+            id="tech.ecoa.osets.eclipse.plugin.editors.IntLogicalSysEditor"
+            name="Integration Logical Systems Editor">
+      </editor>
+      <editor
+            class="tech.ecoa.osets.eclipse.plugin.editors.IntDeploymentEditor"
+            contributorClass="tech.ecoa.osets.eclipse.plugin.common.GraphicalEditorContributor"
+            extensions="deploy"
+            icon="icons/deploy.png"
+            id="tech.ecoa.osets.eclipse.plugin.editors.IntDeploymentEditor"
+            name="Integration Deployment Editor">
+      </editor>
+      <editor
+            class="tech.ecoa.osets.eclipse.plugin.editors.CompImplEditor"
+            contributorClass="tech.ecoa.osets.eclipse.plugin.common.GraphicalEditorContributor"
+            extensions="cimpl"
+            icon="icons/comp_impl.png"
+            id="tech.ecoa.osets.eclipse.plugin.editors.CompImplEditor"
+            name="Component Implementation Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="osets-eclipse-plugin"
+            name="ECOA Wizards">
+      </category>
+      <wizard
+            category="osets-eclipse-plugin"
+            class="tech.ecoa.osets.eclipse.plugin.wizards.TypesWizard"
+            icon="icons/types.png"
+            id="tech.ecoa.osets.eclipse.plugin.wizards.TypesWizard"
+            name="Types Editor">
+      </wizard>
+      <wizard
+            category="osets-eclipse-plugin"
+            class="tech.ecoa.osets.eclipse.plugin.wizards.ServicesWizard"
+            icon="icons/services.png"
+            id="tech.ecoa.osets.eclipse.plugin.wizards.ServicesWizard"
+            name="Services Editor">
+      </wizard>
+      <wizard
+            category="osets-eclipse-plugin"
+            class="tech.ecoa.osets.eclipse.plugin.wizards.CompDefWizard"
+            icon="icons/comp_def.png"
+            id="tech.ecoa.osets.eclipse.plugin.wizards.CompDefWizard"
+            name="Component Definition Editor">
+      </wizard>
+      <wizard
+            category="osets-eclipse-plugin"
+            class="tech.ecoa.osets.eclipse.plugin.wizards.InitAssemblyWizard"
+            icon="icons/init_assmbl.png"
+            id="tech.ecoa.osets.eclipse.plugin.wizards.InitAssemblyWizard"
+            name="Initial Assembly Editor">
+      </wizard>
+      <wizard
+            category="osets-eclipse-plugin"
+            class="tech.ecoa.osets.eclipse.plugin.wizards.CompImplWizard"
+            icon="icons/comp_impl.png"
+            id="tech.ecoa.osets.eclipse.plugin.wizards.CompImplWizard"
+            name="Component Implementation Editor">
+      </wizard>
+      <wizard
+            category="osets-eclipse-plugin"
+            class="tech.ecoa.osets.eclipse.plugin.wizards.IntDeploymentWizard"
+            icon="icons/deploy.png"
+            id="tech.ecoa.osets.eclipse.plugin.wizards.IntDeploymentWizard"
+            name="Integration - Deployment Editor">
+      </wizard>
+      <wizard
+            category="osets-eclipse-plugin"
+            class="tech.ecoa.osets.eclipse.plugin.wizards.IntLogicalSysWizard"
+            icon="icons/log_sys.png"
+            id="tech.ecoa.osets.eclipse.plugin.wizards.IntLogicalSysWizard"
+            name="Integration - Logical System Editor">
+      </wizard>
+      <wizard
+            category="osets-eclipse-plugin"
+            class="tech.ecoa.osets.eclipse.plugin.wizards.IntFinalAssemblyWizard"
+            icon="icons/final_assmbl.png"
+            id="tech.ecoa.osets.eclipse.plugin.wizards.FinalAssemblyWizard"
+            name="Integration - Final Assembly Editor">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="tech.ecoa.osets.eclipse.plugin.commands.TypesWizardCommand"
+            id="tech.ecoa.osets.eclipse.plugin.commands.TypesWizardCommand"
+            name="TypesWizard">
+      </command>
+      <command
+            defaultHandler="tech.ecoa.osets.eclipse.plugin.commands.ServicesWizardCommand"
+            id="tech.ecoa.osets.eclipse.plugin.commands.ServicesWizardCommand"
+            name="ServicesWizard">
+      </command>
+      <command
+            defaultHandler="tech.ecoa.osets.eclipse.plugin.commands.CompDefWizardCommand"
+            id="tech.ecoa.osets.eclipse.plugin.commands.CompDefWizardCommand"
+            name="CompDefWizard">
+      </command>
+      <command
+            defaultHandler="tech.ecoa.osets.eclipse.plugin.commands.CompImplWizardCommand"
+            id="tech.ecoa.osets.eclipse.plugin.commands.CompImplWizardCommand"
+            name="CompImplWizard">
+      </command>
+      <command
+            defaultHandler="tech.ecoa.osets.eclipse.plugin.commands.DeployWizardCommand"
+            id="tech.ecoa.osets.eclipse.plugin.commands.DeployWizardCommand"
+            name="DeployWizard">
+      </command>
+      <command
+            defaultHandler="tech.ecoa.osets.eclipse.plugin.commands.FinalAssmblWizardCommand"
+            id="tech.ecoa.osets.eclipse.plugin.commands.FinalAssmblWizardCommand"
+            name="FinalAssmblWizard">
+      </command>
+      <command
+            defaultHandler="tech.ecoa.osets.eclipse.plugin.commands.InitAssmblWizardCommand"
+            id="tech.ecoa.osets.eclipse.plugin.commands.InitAssmblWizardCommand"
+            name="InitAssmblWizard">
+      </command>
+      <command
+            defaultHandler="tech.ecoa.osets.eclipse.plugin.commands.LogicalSysWizardCommand"
+            id="tech.ecoa.osets.eclipse.plugin.commands.LogicalSysWizardCommand"
+            name="LogicalSysWizard">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar
+               id="tech.ecoa.osets.eclipse.plugin.toolbar.Wizards"
+               label="Wizards">
+            <command
+                  commandId="tech.ecoa.osets.eclipse.plugin.commands.TypesWizardCommand"
+                  icon="icons/types.png"
+                  label="Types Wizard"
+                  style="push"
+                  tooltip="Types Wizard">
+            </command>
+            <command
+                  commandId="tech.ecoa.osets.eclipse.plugin.commands.ServicesWizardCommand"
+                  icon="icons/services.png"
+                  label="Services Wizard"
+                  style="push"
+                  tooltip="Services Wizard">
+            </command>
+            <command
+                  commandId="tech.ecoa.osets.eclipse.plugin.commands.CompDefWizardCommand"
+                  icon="icons/comp_def.png"
+                  label="Component Definition Wizard"
+                  style="push"
+                  tooltip="Component Definition Wizard">
+            </command>
+            <command
+                  commandId="tech.ecoa.osets.eclipse.plugin.commands.InitAssmblWizardCommand"
+                  icon="icons/init_assmbl.png"
+                  label="Initial Assembly Wizard"
+                  style="push"
+                  tooltip="Initial Assembly Wizard">
+            </command>
+            <command
+                  commandId="tech.ecoa.osets.eclipse.plugin.commands.CompImplWizardCommand"
+                  icon="icons/comp_impl.png"
+                  label="Component Implementation Wizard"
+                  style="push"
+                  tooltip="Component Implementation Wizard">
+            </command>
+            <command
+                  commandId="tech.ecoa.osets.eclipse.plugin.commands.FinalAssmblWizardCommand"
+                  icon="icons/final_assmbl.png"
+                  label="Final Assembly Wizard"
+                  style="push"
+                  tooltip="Final Assembly Wizard">
+            </command>
+            <command
+                  commandId="tech.ecoa.osets.eclipse.plugin.commands.LogicalSysWizardCommand"
+                  icon="icons/log_sys.png"
+                  label="Logical Systems Wizard"
+                  style="push"
+                  tooltip="Logical Systems Wizard">
+            </command>
+            <command
+                  commandId="tech.ecoa.osets.eclipse.plugin.commands.DeployWizardCommand"
+                  icon="icons/deploy.png"
+                  label="Deploy Wizard"
+                  style="push"
+                  tooltip="Deploy Wizard">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+</plugin>
