@@ -5,7 +5,7 @@ It consists of a plugin for ECLIPSE NEON which produces ECOA XML (allowing the d
 
 OSETS supports ECOA Architecture Specification version 5, with the exception of Hierarchical Data Libraries; Quality of Service; and PINFO.
 
-Information on ECOA (including the specification, tutorials, and guidance material) is available at www.ECOA.technology.
+Information on ECOA (including the specification, tutorials, and guidance material) is available at www.ECOA.technology.  Information on version 5 of ECOA (which this toolset targets) is available at www.ecoa.technology/archives.html.
 
 
 _OSETS is provided “as is”, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement.  In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.  OSETS and its outputs are not claimed to be fit or safe for any purpose.  Any user should satisfy themselves that this software or its outputs are appropriate for its intended purpose._
