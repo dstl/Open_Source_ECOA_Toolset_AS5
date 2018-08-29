@@ -106,7 +106,7 @@ import com.iawg.ecoa.systemmodel.servicedefinition.serviceoperation.SM_RRService
 public class XMLProc4aCompImpl {
 	private static final Logger LOGGER = LogManager.getLogger(XMLProc4aCompImpl.class);
 	private static final String SEP_PATTERN_41 = "moduleInstance";
-	private static List<ECOAFile> componentImplementations = new ArrayList<ECOAFile>();
+	private List<ECOAFile> componentImplementations = new ArrayList<ECOAFile>();
 	private SystemModel systemModel;
 	private Integer repoID = 1;
 

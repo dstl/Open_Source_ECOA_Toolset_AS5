@@ -26,7 +26,7 @@ import com.iawg.ecoa.systemmodel.componentimplementation.SM_ModuleImpl;
  */
 public class XMLProc4bBinDesc {
 	private static final Logger LOGGER = LogManager.getLogger(XMLProc4bBinDesc.class);
-	private static List<ECOAFile> binDescFiles = new ArrayList<ECOAFile>();
+	private List<ECOAFile> binDescFiles = new ArrayList<ECOAFile>();
 
 	public void parseFile(Path binDescFile) {
 		XMLFileProcessor pxfp = new XMLFileProcessor("ecoa-bin-desc-1.0.xsd", "com.iawg.ecoa.jaxbclasses.step4bBinDesc");

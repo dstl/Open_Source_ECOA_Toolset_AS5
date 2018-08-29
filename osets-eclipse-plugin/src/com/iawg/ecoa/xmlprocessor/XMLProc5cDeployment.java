@@ -39,7 +39,7 @@ import com.iawg.ecoa.systemmodel.deployment.logicalsystem.SM_LogicalComputingPla
 public class XMLProc5cDeployment {
 	private static final Logger LOGGER = LogManager.getLogger(XMLProc5cDeployment.class);
 	private static final String SEP_PATTERN_01 = " does not exist";
-	public static List<Deployment> deployments = new ArrayList<Deployment>();
+	public List<Deployment> deployments = new ArrayList<Deployment>();
 
 	public void parseFile(Path deploymentFile) {
 		XMLFileProcessor pxfp = new XMLFileProcessor("ecoa-deployment-1.0.xsd", "com.iawg.ecoa.jaxbclasses.step5cDeployment");

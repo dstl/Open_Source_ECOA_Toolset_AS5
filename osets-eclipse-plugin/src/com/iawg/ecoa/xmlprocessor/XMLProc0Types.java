@@ -45,7 +45,7 @@ import com.iawg.ecoa.systemmodel.types.SM_Variant_Record_Type;
  */
 public class XMLProc0Types {
 	private static final Logger LOGGER = LogManager.getLogger(XMLProc0Types.class);
-	private static List<ECOAFile> arrLstLibraryFile = new ArrayList<ECOAFile>();
+	private List<ECOAFile> arrLstLibraryFile = new ArrayList<ECOAFile>();
 
 	private void checkType(SystemModel systemModel, String currentNamespace, String typeName) {
 		boolean exists = false;
