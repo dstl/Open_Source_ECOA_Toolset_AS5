@@ -36,7 +36,7 @@ import com.iawg.ecoa.systemmodel.servicedefinition.serviceoperation.SM_RRService
 public class XMLProc1ServiceDefs {
 	private static final Logger LOGGER = LogManager.getLogger(XMLProc1ServiceDefs.class);
 	private static final String SEP_PATTERN_21 = "Service ";
-	private static List<ECOAFile> serviceDefinitions = new ArrayList<ECOAFile>();
+	private List<ECOAFile> serviceDefinitions = new ArrayList<ECOAFile>();
 
 	private List<Data> getData(ServiceDefinition sd) {
 		List<Data> dataList = new ArrayList<Data>();

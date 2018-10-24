@@ -34,7 +34,7 @@ import com.iawg.ecoa.systemmodel.componentdefinition.serviceinstance.SM_ServiceI
  */
 public class XMLProc2aCompDefs {
 	private static final Logger LOGGER = LogManager.getLogger(XMLProc2aCompDefs.class);
-	private static List<ECOAFile> componentDefinitions = new ArrayList<ECOAFile>();
+	private List<ECOAFile> componentDefinitions = new ArrayList<ECOAFile>();
 
 	private String getComponentNameFromFilename(Path name) {
 		String sa[] = name.getFileName().toString().split("/");

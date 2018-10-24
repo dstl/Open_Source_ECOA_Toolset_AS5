@@ -192,7 +192,7 @@ public class CompDefWizard extends Wizard implements INewWizard {
 
 	@Override
 	public boolean canFinish() {
-		return true;
+		return page.isPageComplete();
 	}
 
 }
